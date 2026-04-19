@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh from Nature – Kodambakkam Park &amp; Marina Beach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FEFCF7;
+      color: #1C2A1E;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --green-deep:  #0D5C3A;
+      --green-mid:   #1D8A58;
+      --green-light: #4BBD7E;
+      --green-pale:  #D6F0E4;
+      --cream:       #FEFCF7;
+      --cream-dark:  #F5F0E8;
+      --white:       #FFFFFF;
+      --text-dark:   #1C2A1E;
+      --text-mid:    #3D5244;
+      --text-light:  #6B8F74;
+      --wa-green:    #25D366;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background: rgba(254,252,247,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(29,138,88,0.12);
+      padding: 0.85rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--green-deep);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo span { font-size: 1.3rem; }
+    .nav-menu {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-menu a {
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-menu a:hover {
+      color: var(--green-mid);
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--green-mid);
+      transition: width 0.3s ease;
+    }
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--green-deep);
+    }
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(254,252,247,0.98);
+        padding: 1rem 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(29,138,88,0.12);
+      }
+      .nav-menu.active {
+        display: flex;
+      }
+      .nav-toggle {
+        display: block;
+      }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      overflow: hidden;
+    }
+    .hero-video-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(10,61,37,0.78) 0%, rgba(29,138,88,0.65) 55%, rgba(75,189,126,0.55) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .hero-leaf {
+      width: 140px;
+      height: 140px;
+      margin-bottom: 1.2rem;
+      animation: float 3.5s ease-in-out infinite;
+      display: block;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      color: #fff;
+      line-height: 1.2;
+      max-width: 600px;
+      margin: 0 auto 1rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .hero h1 em { font-style: italic; color: #A8EBC8; }
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 380px;
+      margin: 0 auto 2rem;
+      line-height: 1.65;
+      font-weight: 300;
+    }
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-bottom: 2.4rem;
+    }
+    .hero-tag {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.28);
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--wa-green);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(37,211,102,0.55); }
+    .hero-cta svg { width: 22px; height: 22px; }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%); z-index: 2;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 1px; height: 40px;
+      background: rgba(255,255,255,0.35);
+      animation: scrollLine 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ── COMMON ── */
+    section { padding: 5rem 1.5rem; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--green-mid); margin-bottom: 0.6rem; display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      color: var(--green-deep); line-height: 1.25; margin-bottom: 0.75rem;
+    }
+    .section-desc {
+      font-size: 0.96rem; color: var(--text-mid);
+      line-height: 1.7; max-width: 560px;
+    }
+    .center { text-align: center; margin-left: auto; margin-right: auto; }
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── PRODUCTS ── */
+    #products { background: var(--cream-dark); }
+    .products-header { margin-bottom: 3rem; }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.4rem;
+      max-width: 900px; margin: 0 auto;
+    }
+    .product-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(29,138,88,0.1);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(13,92,58,0.14);
+    }
+
+    /* Video banner in product cards */
+    .product-banner {
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+    .product-banner video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-body { padding: 1.3rem 1.4rem 1.5rem; }
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--green-deep); margin-bottom: 0.4rem;
+    }
+    .product-benefit {
+      font-size: 0.84rem; color: var(--text-light);
+      line-height: 1.55; margin-bottom: 0.9rem;
+    }
+    .product-tag {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green-deep);
+      font-size: 0.73rem; font-weight: 500;
+      padding: 3px 10px; border-radius: 20px;
+    }
+
+    /* ── ABOUT ── */
+    #about-section { background: var(--cream); }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr;
+      gap: 2rem; max-width: 900px; margin: 0 auto;
+    }
+    @media (min-width: 700px) {
+      .about-inner { grid-template-columns: 1fr 1fr; align-items: center; }
+    }
+
+    /* Video card for about section */
+    .about-visual {
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      height: 300px;
+    }
+    .about-visual video {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .about-visual-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,92,58,0.82) 0%, rgba(13,92,58,0.2) 60%, transparent 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.6rem 1.8rem;
+    }
+    .about-visual-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; color: #fff; line-height: 1.4;
+    }
+    .about-visual-sub {
+      font-size: 0.85rem; color: rgba(255,255,255,0.65);
+      margin-top: 4px; font-weight: 300;
+    }
+
+    .about-points { display: flex; flex-direction: column; gap: 1.1rem; }
+    .about-point { display: flex; align-items: flex-start; gap: 14px; }
+    .about-point-icon {
+      width: 38px; height: 38px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .about-point-title { font-weight: 500; font-size: 0.96rem; color: var(--green-deep); margin-bottom: 2px; }
+    .about-point-desc  { font-size: 0.84rem; color: var(--text-light); line-height: 1.55; }
+
+    /* ── TIMINGS ── */
+    #timings { background: var(--green-deep); text-align: center; padding: 4rem 1.5rem; }
+    #timings .section-label { color: var(--green-light); }
+    #timings .section-title { color: #fff; margin-bottom: 2.5rem; }
+    .timings-grid {
+      display: flex; flex-wrap: wrap;
+      gap: 1.2rem; justify-content: center;
+      max-width: 700px; margin: 0 auto;
+    }
+    .timing-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px; padding: 1.4rem 1.8rem; min-width: 170px; flex: 1;
+    }
+    .timing-card-icon { font-size: 1.6rem; display: block; margin-bottom: 0.6rem; }
+    .timing-card-label {
+      font-size: 0.75rem; color: rgba(255,255,255,0.55);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem;
+    }
+    .timing-card-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; }
+    .timing-card-sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 3px; }
+    .closed-note { margin-top: 1.8rem; font-size: 0.84rem; color: rgba(255,255,255,0.45); }
+
+    /* ── DUAL SCHEDULE ── */
+    .schedule-grid {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      max-width: 760px; margin: 2rem auto 0;
+    }
+    .schedule-block {
+      flex: 1; min-width: 280px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px; padding: 2rem 2rem 1.6rem;
+    }
+    .schedule-block-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 50px; margin-bottom: 1.2rem;
+      background: rgba(255,255,255,0.18); color: rgba(255,255,255,0.9);
+    }
+    .schedule-block-day {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem; color: #fff; margin-bottom: 0.3rem;
+    }
+    .schedule-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .schedule-row-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .schedule-row-label {
+      font-size: 0.72rem; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .schedule-row-value { font-size: 0.95rem; color: rgba(255,255,255,0.9); font-weight: 500; }
+
+    /* ── LOCATION ── */
+    #location-section { background: var(--cream-dark); }
+    .location-inner { max-width: 900px; margin: 0 auto; }
+    .location-header { margin-bottom: 2rem; }
+    .location-dual-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem;
+    }
+    @media (max-width: 640px) {
+      .location-dual-grid { grid-template-columns: 1fr; }
+    }
+    .location-block {
+      background: var(--white);
+      border: 1px solid rgba(29,138,88,0.12);
+      border-radius: 20px; padding: 1.6rem; overflow: hidden;
+    }
+    .location-block-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 50px; margin-bottom: 1rem;
+      background: rgba(29,138,88,0.10); color: var(--green-deep);
+    }
+    .location-block-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; color: var(--text-dark); margin-bottom: 0.3rem;
+    }
+    .location-block-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.9rem; }
+    .location-block-detail {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.45rem;
+    }
+    .location-block-detail-icon { flex-shrink: 0; margin-top: 1px; }
+    .location-block-map {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(29,138,88,0.12);
+      margin: 1rem 0;
+    }
+    .location-block-map iframe { display: block; width: 100%; height: 200px; border: none; }
+    .map-wrapper {
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid rgba(29,138,88,0.15);
+      box-shadow: 0 12px 40px rgba(13,92,58,0.1);
+      margin-bottom: 1.4rem;
+    }
+    .map-wrapper iframe { display: block; width: 100%; height: 340px; border: none; }
+    .location-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-directions {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-deep); color: #fff;
+      padding: 12px 22px; border-radius: 50px;
+      font-size: 0.9rem; font-weight: 500; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-directions:hover { background: var(--green-mid); transform: translateY(-2px); }
+    .address-card {
+      background: var(--white);
+      border: 1px solid rgba(29,138,88,0.12);
+      border-radius: 14px; padding: 1rem 1.4rem;
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 1.4rem;
+    }
+    .address-icon { font-size: 1.4rem; margin-top: 2px; flex-shrink: 0; }
+    .address-line { font-size: 0.93rem; color: var(--text-dark); font-weight: 500; }
+    .address-sub  { font-size: 0.82rem; color: var(--text-light); margin-top: 2px; }
+
+    /* ── WHATSAPP SECTION ── */
+    #whatsapp-section {
+      background: linear-gradient(140deg, #075E54 0%, #128C7E 50%, #25D366 100%);
+      text-align: center; padding: 5rem 1.5rem;
+    }
+    #whatsapp-section .section-label { color: rgba(255,255,255,0.7); }
+    #whatsapp-section .section-title { color: #fff; margin-bottom: 0.75rem; }
+    #whatsapp-section .section-desc  { color: rgba(255,255,255,0.75); margin: 0 auto 2.5rem; }
+    .wa-main-btn {
+      display: inline-flex; align-items: center; gap: 14px;
+      background: #fff; color: #075E54;
+      font-size: 1.1rem; font-weight: 500;
+      padding: 16px 32px; border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 36px rgba(0,0,0,0.2);
+      transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 1.4rem;
+    }
+    .wa-main-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.28); }
+    .wa-main-btn svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .wa-hint { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 1rem; }
+    .wa-preview {
+      max-width: 320px; margin: 2rem auto 0;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px; padding: 1rem 1.2rem; text-align: left;
+    }
+    .wa-preview-label {
+      font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.7rem;
+    }
+    .wa-bubble {
+      background: #DCF8C6; border-radius: 12px 12px 0 12px;
+      padding: 10px 14px; font-size: 0.85rem; color: #111; line-height: 1.5;
+      display: inline-block; max-width: 85%;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text-dark); color: rgba(255,255,255,0.65);
+      padding: 3rem 1.5rem 2rem; text-align: center;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
+    .footer-tagline { font-size: 0.84rem; color: rgba(255,255,255,0.45); margin-bottom: 2rem; }
+    .footer-grid {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      justify-content: center; margin-bottom: 2rem; text-align: left;
+    }
+    .footer-col { min-width: 160px; }
+    .footer-col-title { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.6rem; }
+    .footer-col p { font-size: 0.86rem; line-height: 1.65; color: rgba(255,255,255,0.6); }
+    .footer-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 1.5rem; }
+    .footer-copy { font-size: 0.76rem; color: rgba(255,255,255,0.3); }
+
+    /* ── FLOATING WA BUTTON ── */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+      background: var(--wa-green); border-radius: 50px;
+      box-shadow: 0 6px 28px rgba(37,211,102,0.45);
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 20px; text-decoration: none; color: #fff;
+      font-size: 0.9rem; font-weight: 500;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-float svg { width: 24px; height: 24px; flex-shrink: 0; }
+    .wa-float:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(37,211,102,0.55); }
+    .wa-float-label { white-space: nowrap; }
+    @media (max-width: 500px) {
+      .wa-float-label { display: none; }
+      .wa-float { padding: 14px; border-radius: 50%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <img src="logo_bg.png" alt="Coco Logo" style="width: 2.3rem; height: 2.3rem;"> Coco Break
+    </div>
+    <button class="nav-toggle show" id="nav-toggle">☰</button>
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#about-section">About</a></li>
+      <li><a href="#timings">Timings</a></li>
+      <li><a href="#location-section">Location</a></li>
+      <li><a href="#whatsapp-section">Order</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO — sunrise video background -->
+  <section class="hero">
+    <video class="hero-video-bg" autoplay muted loop playsinline>
+      <source src="videos/sun_rise.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="logo_bg.png" alt="Coco Break Logo" class="hero-leaf">
+      <h1>Start Your Morning<br>with <em>Pure Nature</em></h1>
+      <p class="hero-sub">
+        Fresh coconut milk, cooling coconut water &amp; protein-rich sprouted green gram —
+        handpicked and prepared every dawn, just for you.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">🌅 Mon–Fri · 6:00–7:30 AM · Kodambakkam Park</span>
+        <span class="hero-tag">🌇 Sat–Sun · 6:00–8:00 PM · Marina Beach</span>
+        <span class="hero-tag">✅ 100% Natural</span>
+      </div>
+      <a class="hero-cta"
+         href="https://wa.me/919150314331?text=Hi!%20I%20would%20like%20to%20place%20an%20order."
+         target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2.667C8.636 2.667 2.667 8.636 2.667 16c0 2.352.628 4.558 1.72 6.468L2.667 29.333l7.097-1.693A13.27 13.27 0 0016 29.333c7.364 0 13.333-5.97 13.333-13.333S23.364 2.667 16 2.667z" fill="white" fill-opacity="0.25"/>
+          <path d="M22.396 19.458c-.31-.155-1.834-.904-2.118-.906-.283-.002-.489.149-.676.397-.187.249-.726.903-.888 1.086-.163.183-.325.205-.635.051-.31-.155-1.308-.482-2.491-1.537-.92-.82-1.54-1.832-1.72-2.142-.18-.31-.019-.477.136-.631.14-.138.31-.36.465-.54.156-.18.208-.31.312-.517.104-.207.052-.387-.026-.543-.078-.155-.676-1.63-.926-2.232-.244-.587-.491-.507-.676-.516l-.576-.01c-.2 0-.524.075-.798.374-.275.3-1.048 1.024-1.048 2.498s1.073 2.897 1.222 3.098c.15.2 2.11 3.22 5.11 4.514.714.308 1.272.492 1.706.630.717.228 1.37.196 1.885.119.575-.086 1.834-.75 2.093-1.474.258-.724.258-1.344.181-1.474-.078-.13-.283-.207-.593-.362z" fill="white"/>
+        </svg>
+        Order on WhatsApp
+      </a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- PRODUCTS — each card has its own video -->
+  <section id="products">
+    <div class="products-header center fade-up">
+      <span class="section-label">What we offer</span>
+      <h2 class="section-title">Nature's Best, Every Morning</h2>
+      <p class="section-desc center">
+        Three simple, powerful superfoods — no additives, no shortcuts.
+        Prepared fresh before sunrise, served warm at the park.
+      </p>
+    </div>
+    <div class="product-grid" style="margin-top: 2.5rem;">
+
+      <div class="product-card fade-up">
+        <div class="product-banner">
+          <video autoplay muted loop playsinline>
+            <source src="videos/coco_milk.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Coconut Milk</div>
+          <p class="product-benefit">Freshly extracted, creamy and rich. Loaded with healthy fats that fuel your morning and keep you satiated all day.</p>
+          <span class="product-tag">✦ No preservatives</span>
+        </div>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-banner">
+          <video autoplay muted loop playsinline>
+            <source src="videos/coconut_water.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Coconut Water</div>
+          <p class="product-benefit">Nature's sports drink. Packed with electrolytes, potassium, and antioxidants — perfect after your morning walk or workout.</p>
+          <span class="product-tag">✦ Rich in electrolytes</span>
+        </div>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-banner">
+          <video autoplay muted loop playsinline>
+            <source src="videos/green_gram.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Sprouted Green Gram</div>
+          <p class="product-benefit">Home-sprouted overnight for maximum nutrition. High in protein, fibre, and enzymes that supercharge your metabolism.</p>
+          <span class="product-tag">✦ High protein</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT — sunset video card -->
+  <section id="about-section">
+    <div class="about-inner">
+      <div class="about-visual fade-up">
+        <video autoplay muted loop playsinline>
+          <source src="videos/sun_set.mp4" type="video/mp4" />
+        </video>
+        <div class="about-visual-overlay">
+          <div class="about-visual-text">Up before the sun,<br>so you eat like one.</div>
+          <div class="about-visual-sub">Freshly prepared every single morning</div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <span class="section-label">Our promise</span>
+        <h2 class="section-title">Why Customers<br>Keep Coming Back</h2>
+        <div class="about-points" style="margin-top: 1.4rem;">
+          <div class="about-point">
+            <div class="about-point-icon">🌿</div>
+            <div>
+              <div class="about-point-title">100% Natural, always</div>
+              <div class="about-point-desc">No artificial flavours, colours, or preservatives. What you taste is what nature made.</div>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="about-point-icon">⏰</div>
+            <div>
+              <div class="about-point-title">Made fresh every morning</div>
+              <div class="about-point-desc">Everything is prepared the same morning — never stored overnight or reheated.</div>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="about-point-icon">🤝</div>
+            <div>
+              <div class="about-point-title">Direct from seller to you</div>
+              <div class="about-point-desc">No middlemen, no packaging waste. You meet us directly at the park or the beach.</div>
+            </div>
+          </div>
+          <div class="about-point">
+            <div class="about-point-icon">💬</div>
+            <div>
+              <div class="about-point-title">Easy WhatsApp orders</div>
+              <div class="about-point-desc">Pre-order via WhatsApp the night before and your order will be ready at your visit spot.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMINGS -->
+  <section id="timings">
+    <span class="section-label">Visit us</span>
+    <h2 class="section-title">When &amp; Where to Find Us</h2>
+    <div class="schedule-grid">
+
+      <!-- Mon – Fri -->
+      <div class="schedule-block fade-up">
+        <span class="schedule-block-badge">Weekdays</span>
+        <div class="schedule-block-day">Monday – Friday</div>
+        <div class="schedule-row">
+          <span class="schedule-row-icon">🕕</span>
+          <div>
+            <div class="schedule-row-label">Timing</div>
+            <div class="schedule-row-value">6:00 – 7:30 AM</div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <span class="schedule-row-icon">📍</span>
+          <div>
+            <div class="schedule-row-label">Location</div>
+            <div class="schedule-row-value">Kodambakkam Park, Chennai</div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <span class="schedule-row-icon">🌅</span>
+          <div>
+            <div class="schedule-row-label">Vibe</div>
+            <div class="schedule-row-value">Morning park · Sunrise energy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sat – Sun -->
+      <div class="schedule-block fade-up">
+        <span class="schedule-block-badge">Weekend</span>
+        <div class="schedule-block-day">Saturday – Sunday</div>
+        <div class="schedule-row">
+          <span class="schedule-row-icon">🕕</span>
+          <div>
+            <div class="schedule-row-label">Timing</div>
+            <div class="schedule-row-value">6:00 – 8:00 PM</div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <span class="schedule-row-icon">📍</span>
+          <div>
+            <div class="schedule-row-label">Location</div>
+            <div class="schedule-row-value">Marina Beach, Chennai</div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <span class="schedule-row-icon">🌇</span>
+          <div>
+            <div class="schedule-row-label">Vibe</div>
+            <div class="schedule-row-value">Beach breeze · Sunset hour</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="closed-note">⚠ We sell out fast — pre-order the night before to be sure!</p>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location-section">
+    <div class="location-inner">
+      <div class="location-header fade-up">
+        <span class="section-label">Find us</span>
+        <h2 class="section-title">Two Great Spots to Visit Us</h2>
+        <p class="section-desc" style="margin-bottom: 1.8rem;">
+          We're at Kodambakkam Park on weekday mornings and at Marina Beach on weekend evenings. Easy to spot — just follow the coconut smell! 🥥
+        </p>
+      </div>
+
+      <div class="location-dual-grid fade-up">
+
+        <!-- Kodambakkam Park -->
+        <div class="location-block">
+          <span class="location-block-badge">Mon – Fri · 6:00–7:30 AM</span>
+          <div class="location-block-name">Kodambakkam Park</div>
+          <div class="location-block-sub">Kodambakkam, Chennai, Tamil Nadu</div>
+          <div class="location-block-detail">
+            <span class="location-block-detail-icon">🌅</span>
+            <span>Morning stall — look for us at the park entrance</span>
+          </div>
+          <div class="location-block-map">
+            <iframe
+              src="https://maps.google.com/maps?q=Kodambakkam+Park,+Kodambakkam,+Chennai,+Tamil+Nadu,+India&output=embed"
+              allowfullscreen loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Kodambakkam Park location">
+            </iframe>
+          </div>
+          <div class="location-actions">
+            <a class="btn-directions"
+               href="https://www.google.com/maps/dir/?api=1&destination=Kodambakkam+Park,+Kodambakkam,+Chennai,+Tamil+Nadu"
+               target="_blank" rel="noopener">🗺 Get Directions</a>
+          </div>
+        </div>
+
+        <!-- Marina Beach -->
+        <div class="location-block">
+          <span class="location-block-badge">Sat – Sun · 6:00–8:00 PM</span>
+          <div class="location-block-name">Marina Beach</div>
+          <div class="location-block-sub">Marina, Chennai, Tamil Nadu</div>
+          <div class="location-block-detail">
+            <span class="location-block-detail-icon">🌇</span>
+            <span>Evening stall — find us along the beachside promenade</span>
+          </div>
+          <div class="location-block-map">
+            <iframe
+              src="https://maps.google.com/maps?q=Marina+Beach,+Chennai,+Tamil+Nadu,+India&output=embed"
+              allowfullscreen loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Marina Beach location">
+            </iframe>
+          </div>
+          <div class="location-actions">
+            <a class="btn-directions"
+               href="https://www.google.com/maps/dir/?api=1&destination=Marina+Beach,+Chennai,+Tamil+Nadu"
+               target="_blank" rel="noopener">🗺 Get Directions</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="location-actions fade-up" style="margin-top: 2rem; justify-content: center;">
+        <a class="btn-directions" style="background: var(--green-mid);"
+           href="https://wa.me/919150314331?text=Hi!%20I%20would%20like%20to%20pre-order%20for%20my%20next%20visit."
+           target="_blank" rel="noopener">💬 Pre-Order on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP SECTION -->
+  <section id="whatsapp-section">
+    <span class="section-label">Order now</span>
+    <h2 class="section-title">Ready to Order?<br>Chat with Us!</h2>
+    <p class="section-desc center">
+      Send us a WhatsApp message the night before and your fresh order will be waiting
+      for you at your nearest spot — Kodambakkam Park (weekday mornings) or Marina Beach (weekend evenings). It's that simple.
+    </p>
+    <a class="wa-main-btn"
+       href="https://wa.me/919150314331?text=Hi!%20I%20would%20like%20to%20place%20an%20order%20for%20tomorrow.%20Please%20let%20me%20know%20the%20availability."
+       target="_blank" rel="noopener">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="16" fill="#25D366"/>
+        <path d="M22.396 19.458c-.31-.155-1.834-.904-2.118-.906-.283-.002-.489.149-.676.397-.187.249-.726.903-.888 1.086-.163.183-.325.205-.635.051-.31-.155-1.308-.482-2.491-1.537-.92-.82-1.54-1.832-1.72-2.142-.18-.31-.019-.477.136-.631.14-.138.31-.36.465-.54.156-.18.208-.31.312-.517.104-.207.052-.387-.026-.543-.078-.155-.676-1.63-.926-2.232-.244-.587-.491-.507-.676-.516l-.576-.01c-.2 0-.524.075-.798.374-.275.3-1.048 1.024-1.048 2.498s1.073 2.897 1.222 3.098c.15.2 2.11 3.22 5.11 4.514.714.308 1.272.492 1.706.630.717.228 1.37.196 1.885.119.575-.086 1.834-.75 2.093-1.474.258-.724.258-1.344.181-1.474-.078-.13-.283-.207-.593-.362z" fill="white"/>
+        <path d="M16 2.667C8.636 2.667 2.667 8.636 2.667 16c0 2.352.628 4.558 1.72 6.468L2.667 29.333l7.097-1.693A13.27 13.27 0 0016 29.333c7.364 0 13.333-5.97 13.333-13.333S23.364 2.667 16 2.667zm0 24.267c-2.042 0-3.95-.537-5.6-1.474l-.4-.238-4.153.99 1.058-3.876-.262-.41A10.894 10.894 0 015.108 16C5.108 9.99 9.99 5.108 16 5.108c6.01 0 10.892 4.882 10.892 10.892S22.01 26.934 16 26.934z" fill="white" fill-opacity="0.7"/>
+      </svg>
+      Chat on WhatsApp
+    </a>
+    <div class="wa-preview">
+      <div class="wa-preview-label">Your message will say</div>
+      <div class="wa-bubble">Hi! I would like to place an order</div>
+    </div>
+    <p class="wa-hint">We reply within minutes — usually the same evening</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">🥥 Fresh from Nature</div>
+    <div class="footer-tagline">Pure. Simple. Natural.</div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title">Products</div>
+        <p>Coconut Milk<br>Coconut Water<br>Sprouted Green Gram</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Timings</div>
+        <p>Mon–Fri: 6:00–7:30 AM<br>Sat–Sun: 6:00–8:00 PM</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Locations</div>
+        <p>Kodambakkam Park (Mon–Fri)<br>Marina Beach (Sat–Sun)<br>Chennai, Tamil Nadu</p>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-copy">
+      © 2025 Fresh from Nature · Kodambakkam Park &amp; Marina Beach · Chennai<br>
+      Made with 🌿 for healthy mornings
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP -->
+  <a class="wa-float"
+     href="https://wa.me/919150314331?text=Hi!%20I%20would%20like%20to%20place%20an%20order."
+     target="_blank" rel="noopener" aria-label="Order on WhatsApp">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22.396 19.458c-.31-.155-1.834-.904-2.118-.906-.283-.002-.489.149-.676.397-.187.249-.726.903-.888 1.086-.163.183-.325.205-.635.051-.31-.155-1.308-.482-2.491-1.537-.92-.82-1.54-1.832-1.72-2.142-.18-.31-.019-.477.136-.631.14-.138.31-.36.465-.54.156-.18.208-.31.312-.517.104-.207.052-.387-.026-.543-.078-.155-.676-1.63-.926-2.232-.244-.587-.491-.507-.676-.516l-.576-.01c-.2 0-.524.075-.798.374-.275.3-1.048 1.024-1.048 2.498s1.073 2.897 1.222 3.098c.15.2 2.11 3.22 5.11 4.514.714.308 1.272.492 1.706.630.717.228 1.37.196 1.885.119.575-.086 1.834-.75 2.093-1.474.258-.724.258-1.344.181-1.474-.078-.13-.283-.207-.593-.362z" fill="white"/>
+      <path d="M16 2C8.268 2 2 8.268 2 16c0 2.41.641 4.671 1.762 6.626L2 30l7.58-1.726A13.933 13.933 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6c-2.088 0-4.04-.55-5.728-1.508l-.41-.244-4.246 1.012 1.082-3.963-.267-.42A11.56 11.56 0 014.4 16C4.4 9.004 9.804 3.6 16 3.6S27.6 9.004 27.6 16 22.196 27.6 16 27.6z" fill="white"/>
+    </svg>
+    <span class="wa-float-label">Order on WhatsApp</span>
+  </a>
+
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      navToggle.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close menu when link is clicked
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.textContent = '☰';
+      });
+    });
+
+    // Intersection observer for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
